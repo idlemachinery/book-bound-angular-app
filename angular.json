@@ -53,6 +53,14 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "in-memory": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/app.module.ts",
+                  "with": "src/app/in-memory-api.app.module.ts"
+                }
+              ]
             }
           }
         },
@@ -64,6 +72,9 @@
           "configurations": {
             "production": {
               "browserTarget": "book-bound-client:build:production"
+            },
+            "in-memory": {
+              "browserTarget": "book-bound-client:build:in-memory"
             }
           }
         },

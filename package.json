@@ -19,6 +19,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json -o",
+    "start-in-memory": "ng serve -c in-memory -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -35,6 +36,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@ng-bootstrap/ng-bootstrap": "4.0.3",
+    "angular-in-memory-web-api": "0.8.0",
     "core-js": "^2.5.4",
     "font-awesome": "4.7.0",
     "lodash": "4.17.11",
