@@ -1,0 +1,135 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item"><a [routerLink]="['/books']">Books</a></li>
+  <li class="breadcrumb-item active">{{pageTitle}}</li>
+</ol>
+
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card mb-3" *ngIf="book">
+      <h3 class="card-header">{{pageTitle}} Book</h3>
+      <form novalidate
+            (ngSubmit)="save()"
+            [formGroup]="form"
+            autocomplete="off">
+        <div class="card-body">
+          <fieldset>
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.title}">
+              <label class="form-control-label"
+                    for="titleId">Title</label>
+              <input class="form-control"
+                    id="titleId"
+                    type="text"
+                    placeholder="Title (required)"
+                    formControlName="title"
+                    [ngClass]="{'is-invalid': displayMessage.title}"
+                    [autofocus] />
+              <div class="invalid-feedback">{{displayMessage.title}}</div>
+            </div>
+
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.author}">
+              <label class="form-control-label"
+                    for="authorId">Author</label>
+              <input class="form-control"
+                    id="authorId"
+                    type="text"
+                    placeholder="Author (required)"
+                    formControlName="author"
+                    [ngClass]="{'is-invalid': displayMessage.author}"
+                    [ngbTypeahead]="authorsSearch"
+                    (selectItem)="onSelectAuthor($event)"
+                    [resultFormatter]="authorsFormatter" />
+              <div class="invalid-feedback">{{displayMessage.author}}</div>
+            </div>
+
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.genre}">
+              <label class="form-control-label"
+                    for="genreId">Genre</label>
+              <input class="form-control"
+                    id="genreId"
+                    type="text"
+                    placeholder="Genre (required)"
+                    formControlName="genre"
+                    [ngClass]="{'is-invalid': displayMessage.genre}" />
+              <div class="invalid-feedback">{{displayMessage.genre}}</div>
+            </div>
+
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.description}">
+              <label class="form-control-label"
+                    for="descriptionId">Description</label>
+              <textarea class="form-control"
+                        id="descriptionId"
+                        rows="3"
+                        placeholder="Description"
+                        formControlName="description"
+                        [ngClass]="{'is-invalid': displayMessage.description}" ></textarea>
+              <div class="invalid-feedback">{{displayMessage.description}}</div>
+            </div>
+
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.read}">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox"
+                        class="custom-control-input"
+                        id="readId"
+                        formControlName="read"
+                        [attr.checked]="form.get('read').value">
+                <label class="custom-control-label" for="readId">Have you read the book?</label>
+                <div class="invalid-feedback">{{displayMessage.read}}</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.goodreadsId}">
+              <label class="form-control-label"
+                    for="goodreadsIdId">Good Reads Id</label>
+              <input class="form-control"
+                    id="goodreadsIdId"
+                    type="number"
+                    placeholder="Good Reads Book Id"
+                    formControlName="goodreadsId"
+                    [ngClass]="{'is-invalid': displayMessage.goodreadsId}" />
+              <div class="invalid-feedback">{{displayMessage.goodreadsId}}</div>
+            </div>
+
+            <div class="form-group"
+                  [ngClass]="{'has-danger': displayMessage.coverImage}">
+              <label class="form-control-label"
+                for="coverImageId">Cover Image</label>
+              <input class="form-control"
+                id="coverImageId"
+                type="text"
+                placeholder="Cover Image"
+                formControlName="coverImage"
+                [ngClass]="{'is-invalid': displayMessage.coverImage}" />
+              <div class="invalid-feedback">{{displayMessage.coverImage}}</div>
+              <img [src]="cover.value"
+                    class="mt-3"
+                    style="max-height: 150px"
+                    *ngIf="cover.value && cover.valid" />
+            </div>
+          </fieldset>
+        </div>
+        <div class="card-footer">
+          <button type="submit"
+                  class="btn btn-lg btn-primary btn-fw-lg mr-2"
+                  [disabled]="!isDirty || !form.valid ||saving">
+            <span class="spinner-border spinner-border-sm mb-2" role="status" aria-hidden="true" *ngIf="saving"></span>
+            Save
+          </button>
+          <a class="btn btn-lg btn-outline-secondary btn-fw-lg"
+             [routerLink]="['/books']">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='errorMessage' class='alert alert-danger'>
+  <h4 class="alert-heading">Error!</h4>
+  {{ errorMessage }}
+</div>

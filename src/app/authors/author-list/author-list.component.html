@@ -1,0 +1,59 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item active">Authors</li>
+</ol>
+
+<div class="card mb-3">
+  <h3 class="card-header">
+    Author List
+    <small class="text-muted">({{collectionSize}})</small>
+    <a [routerLink]="['/authors', 'new']" class="btn btn-primary btn-fw-lg float-right">
+      <i class="fa fa-fw fa-plus"></i> Add New Author
+    </a>
+  </h3>
+  <div class="table-responsive-lg" *ngIf="collectionSize">
+    <table class="table table-striped table-hover table-sm table-borderless mb-0">
+      <thead>
+        <th class="sm">#</th>
+        <th sortable="name" (sort)="onSort($event)">Name</th>
+        <th class="xl"></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let author of authors">
+          <th>{{author.id}}</th>
+          <td>{{author.name}}</td>
+          <td>
+            <a class="btn btn-info btn-sm mr-1 btn-fw-sm"
+                [routerLink]="['/authors', author.id]">
+              <i class="fa fa-fw fa-edit"></i> Edit
+            </a>
+            <button class="btn btn-danger btn-sm btn-fw-sm"
+                    (click)="delete(author.id)">
+              <i class="fa fa-fw fa-remove"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-body" *ngIf="!collectionSize">
+    <b>No Data</b>
+  </div>
+  <div class="card-footer" *ngIf="collectionSize">
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" maxSize="5" rotate="true" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="25">25 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  <h4 class="alert-heading">Error!</h4>
+  {{ errorMessage }}
+</div>

@@ -1,0 +1,50 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+  <li class="breadcrumb-item"><a [routerLink]="['/authors']">Authors</a></li>
+  <li class="breadcrumb-item active">{{pageTitle}}</li>
+</ol>
+
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card mb-3" *ngIf="author">
+      <h3 class="card-header">{{pageTitle}} Author</h3>
+      <form novalidate
+            (ngSubmit)="save()"
+            [formGroup]="form"
+            autocomplete="off">
+        <div class="card-body">
+          <fieldset>
+            <div class="form-group"
+                [ngClass]="{'has-danger': displayMessage.name}">
+              <label class="form-control-label"
+                     for="nameId">Name</label>
+              <input class="form-control"
+                    id="nameId"
+                    type="text"
+                    placeholder="Name (required)"
+                    formControlName="name"
+                    [ngClass]="{'is-invalid': displayMessage.name}"
+                    [autofocus] />
+              <div class="invalid-feedback">{{displayMessage.name}}</div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="card-footer">
+          <button type="submit"
+                  class="btn btn-lg btn-primary btn-fw-lg mr-2"
+                  [disabled]="!isDirty || !form.valid ||saving">
+            <span class="spinner-border spinner-border-sm mb-2" role="status" aria-hidden="true" *ngIf="saving"></span>
+            Save
+          </button>
+          <a class="btn btn-lg btn-outline-secondary btn-fw-lg"
+             [routerLink]="['/authors']">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf='errorMessage' class='alert alert-danger'>
+  <h4 class="alert-heading">Error!</h4>
+  {{ errorMessage }}
+</div>

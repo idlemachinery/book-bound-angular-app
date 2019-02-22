@@ -1,0 +1,11 @@
+<div>
+  <div class="spinner-border spinner-loading text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <bb-nav-menu></bb-nav-menu>
+  <div class="container">
+    <router-outlet></router-outlet>
+    <bb-footer></bb-footer>
+  </div>
+</div>

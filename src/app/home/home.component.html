@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active">Home</li>
+</ol>
+
+<div class="jumbotron">
+  <h1 class="display-3">Book-Bound</h1>
+  <p class="lead">Client application for the Book-Bound API Challenge.</p>
+  <hr class="my-4">
+  <p>The API Challenge involves creating the same API with book and author endpoints using as many different implementations as possible.</p>
+  <div class="lead">
+    <a class="btn btn-primary btn-lg mr-3" href="https://idlemachinery.com/io/the-api-challenge/" role="button">Learn More...</a>
+    <div class="btn-group">
+      <button class="btn btn-primary btn-lg">Navigation</button>
+      <div class="btn-group" ngbDropdown>
+        <button class="btn btn-primary btn-lg dropdown-toggle-split" ngbDropdownToggle></button>
+        <div ngbDropdownMenu>
+          <button class="dropdown-item" [routerLink]="['/']">Home</button>
+          <button class="dropdown-item" [routerLink]="['/authors']">Authors</button>
+          <button class="dropdown-item" [routerLink]="['/books']">Books</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
