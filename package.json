@@ -1,6 +1,6 @@
 {
   "name": "book-bound-client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Client application for the Book-Bound API Challenge.",
   "repository": {
     "type": "git",
